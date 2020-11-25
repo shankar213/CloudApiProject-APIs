@@ -1,0 +1,18 @@
+{
+  "port": 8081,
+  "app": {
+    "name": "ProductApis"
+  },
+  "aws": {
+    "s3_bucket_name": "**s3_bucket_name**",
+    "client_config": {
+      "accessKeyId": "**accessKeyId**",
+      "secretAccessKey":  "**secretAccessKey**",
+      "region":  "**region**"
+    }
+  },
+  "logs": {
+    "level": "debug",
+    "stream": "console"
+  }
+}

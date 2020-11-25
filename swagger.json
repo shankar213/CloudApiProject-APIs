@@ -1,0 +1,369 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Products API",
+    "description": "Find out how your APIs work"
+  },
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "Products",
+      "description": "API to manage products in the system"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/products/": {
+      "post": {
+        "summary": "Add New Products",
+        "tags": [
+          "Products"
+        ],
+        "parameters": [
+          {
+            "name": "product",
+            "in": "body",
+            "description": "create product",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "product": {
+                  "$ref": "#/definitions/Product"
+                }
+              }
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Product Added",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "product": {
+                      "$ref": "#/definitions/Product"
+                    }
+                  }
+                },
+                "status_code": {
+                  "type": "number",
+                  "example": 200
+                },
+                "status_msg": {
+                  "type": "string",
+                  "example": "Product Added Successfully"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "get": {
+        "summary": "Returns a list of Products.",
+        "tags": [
+          "Products"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Products",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "product": {
+                      "$ref": "#/definitions/Product"
+                    }
+                  }
+                },
+                "status_code": {
+                  "type": "number",
+                  "example": 200
+                },
+                "status_msg": {
+                  "type": "string",
+                  "example": "Product Fetched Successfully"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/products/{product_id}": {
+      "get": {
+        "summary": "Returns a Product matching id",
+        "tags": [
+          "Products"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "ID of product to return",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Products",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "products": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/Product"
+                      }
+                    }
+                  }
+                },
+                "status_code": {
+                  "type": "number",
+                  "example": 200
+                },
+                "status_msg": {
+                  "type": "string",
+                  "example": "Product Fetched Successfully"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates Product",
+        "tags": [
+          "Products"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "ID of product to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "product",
+            "in": "body",
+            "description": "create product",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "product": {
+                  "$ref": "#/definitions/Product"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Products",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "product": {
+                      "$ref": "#/definitions/Product"
+                    }
+                  }
+                },
+                "status_code": {
+                  "type": "number",
+                  "example": 200
+                },
+                "status_msg": {
+                  "type": "string",
+                  "example": "Product Updated"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product Not Found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletes the Product",
+        "tags": [
+          "Products"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "ID of product to Delete",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Products",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "product": {
+                      "$ref": "#/definitions/Product"
+                    },
+                    "status_code": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "status_msg": {
+                      "type": "string",
+                      "example": "Product Updated"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product Not Found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    },
+    "/products/{product_id}/image": {
+      "post": {
+        "summary": "Adds Image to the product",
+        "description": "Uploads image to s3 bucket and adds link of image to the product's images array",
+        "tags": [
+          "Products"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "path",
+            "description": "ID of product to update",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "type": "file",
+            "description": "product image"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Products",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "product": {
+                      "$ref": "#/definitions/Product"
+                    }
+                  }
+                },
+                "status_code": {
+                  "type": "number",
+                  "example": 200
+                },
+                "status_msg": {
+                  "type": "string",
+                  "example": "Image Added successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product Not Found"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "price": {
+          "type": "number",
+          "example": 200
+        },
+        "qty": {
+          "type": "number",
+          "example": 20
+        },
+        "category": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
